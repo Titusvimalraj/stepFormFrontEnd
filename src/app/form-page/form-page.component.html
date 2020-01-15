@@ -3,7 +3,7 @@
   <div class="row" style="justify-content: center;margin-top: 1%;">
     <h1 style="width: 90vw;justify-content: center;"><span class="badge badge-secondary"
         style="width: 90vw;justify-content: center;">Step {{nextStep}} of 3</span></h1>
-    <mat-horizontal-stepper labelPosition="bottom" #stepper style="width: 80vw;">
+    <mat-horizontal-stepper labelPosition="bottom" #stepper style="width: 95vw;">
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Property Info</ng-template>
@@ -13,15 +13,15 @@
             <h5 style="margin-bottom: 2%;">Select Property Type<sup style="color: red;">*</sup>:</h5>
 
 
-            <div class="btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-outline-primary ">
+            <div class="btn-group-toggle " data-toggle="buttons">
+              <label class="btn btn-outline-primary " style="margin-top: 2%;">
                 <input type="radio" checked autocomplete="off"> <i class="fa fa-home fa-5x" aria-hidden="true"
                   (click)="setPropertyType('Residential');">
                   <footer style="font-size: 20%;margin-top: 10%;">Residential</footer>
                 </i>
               </label>
-
-              <label class="btn btn-outline-primary " style="margin-left: 10%;">
+              &nbsp;
+              <label class="btn btn-outline-primary " style="margin-top: 2%;" >
                 <input type="radio" autocomplete="off"> <i class="fa fa-building fa-5x" aria-hidden="true"
                   (click)="setPropertyType('Commercial');">
                   <footer style="font-size: 20%;margin-top: 10%;">Commercial</footer>
@@ -32,13 +32,13 @@
           <div style="margin-top: 2%;">
             <h5 style="margin-bottom: 2%;">Select Cleaning Type<sup style="color: red;">*</sup>:</h5>
 
-            <div class="btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-outline-primary ">
+            <div class="btn-group-toggle row" data-toggle="buttons">
+              <label class="btn btn-outline-primary col-12 col-sm-4" style="width: 80%;margin-top: 1%;">
                 <input type="radio" checked autocomplete="off" (click)="setcleaningType('Shift Cleaning');"> Shift
                 Cleaning
               </label>
-
-              <label class="btn btn-outline-primary " style="margin-left: 10%;">
+&nbsp;
+              <label class="btn btn-outline-primary col-12 col-sm-4" style="width: 80%;margin-top: 1%;">
                 <input type="radio" autocomplete="off" (click)="setcleaningType('Seasonal Cleaning');"> Seasonal
                 Cleaning
               </label>
@@ -66,6 +66,7 @@
             <span class="btn btn-outline-primary">
               <p style="color: black;margin: 0 0 0 0">Are you ready!</p>
             </span>
+            &nbsp;
             <button mat-button matStepperNext style="background-color: dodgerblue;color: white;"
               (click)="iterateTheStep()" [disabled]="getpropertyAddressMissingErrorMessage()">Next <i
                 class="fa fa-arrow-right" style="margin-bottom: 7%;" aria-hidden="true"></i></button>
@@ -79,22 +80,22 @@
             <h5 style="margin-bottom: 2%;">ProPerty Size(sq.ft.)<sup style="color: red;">*</sup>:</h5>
 
 
-            <div class="btn-group-toggle numberOptionButton" data-toggle="buttons"
+            <div class="btn-group-toggle numberOptionButton row" data-toggle="buttons"
               style="display:flex;justify-content: space-between;">
-              <label class="btn btn-outline-primary" *ngFor="let option of sqftOptions | keyvalue : returnZero">
+              <label class="btn btn-outline-primary col-4 col-md-2" style="margin-top: 0.5%;margin-left: 0.5%;" *ngFor="let option of sqftOptions | keyvalue : returnZero">
                 <input type="radio" [(ngModel)]="option.key" [ngModelOptions]="{standalone: true}"
                   [value]="option.value" (click)="setPropertySize(option)"> {{option.value}}
               </label>
-
+              
             </div>
           </div>
 
           <div style="margin-top: 2%;">
             <h5 style="margin-bottom: 2%;">Bedrooms<sup style="color: red;">*</sup>:</h5>
 
-            <div class="btn-group-toggle numberOptionButton" data-toggle="buttons"
+            <div class="btn-group-toggle numberOptionButton row" data-toggle="buttons"
               style="display:flex;justify-content: space-between;">
-              <label class="btn btn-outline-primary " *ngFor="let room of bedroomOptions | keyvalue : returnZero">
+              <label class="btn btn-outline-primary col-4 col-md-2 "  style="margin-top: 0.5%;margin-left: 0.5%;" *ngFor="let room of bedroomOptions | keyvalue : returnZero">
                 <input type="radio" [(ngModel)]="room.key" [ngModelOptions]="{standalone: true}"
                   (click)="setbedrooms(room)">{{room.value}}
               </label>
@@ -105,10 +106,10 @@
           <div style="margin-top: 2%;">
             <h5 style="margin-bottom: 2%;">Bathrooms<sup style="color: red;">*</sup>:</h5>
 
-            <div class="btn-group-toggle numberOptionButton" data-toggle="buttons"
+            <div class="btn-group-toggle numberOptionButton row" data-toggle="buttons"
               style="display:flex;justify-content: space-between;">
 
-              <label class="btn btn-outline-primary " *ngFor="let room of bathroomOptions | keyvalue : returnZero">
+              <label class="btn btn-outline-primary col-4 col-md-2 "  style="margin-top: 0.5%;margin-left: 0.5%;" *ngFor="let room of bathroomOptions | keyvalue : returnZero">
                 <input type="radio" [(ngModel)]="room.key" [ngModelOptions]="{standalone: true}"
                   (click)="setBathrooms(room)">{{room.value}}
               </label>
@@ -121,10 +122,10 @@
           <div style="margin-top: 2%;">
             <h5 style="margin-bottom: 2%;">Bathtubs<sup style="color: red;">*</sup>:</h5>
 
-            <div class="btn-group-toggle numberOptionButton" data-toggle="buttons"
+            <div class="btn-group-toggle numberOptionButton row" data-toggle="buttons"
               style="display:flex;justify-content: space-between;">
 
-              <label class="btn btn-outline-primary " *ngFor="let bathtub of bathTubOptions | keyvalue : returnZero">
+              <label class="btn btn-outline-primary col-4 col-md-2"  style="margin-top: 0.5%;margin-left: 0.5%;" *ngFor="let bathtub of bathTubOptions | keyvalue : returnZero">
                 <input type="radio" [(ngModel)]="bathtub.key" [ngModelOptions]="{standalone: true}"
                   (click)="setBathTubs(bathtub)">{{bathtub.value}}
               </label>
@@ -137,34 +138,34 @@
           <div style="margin-top: 2%;">
             <h5 style="margin-bottom: 2%;">Kitchen items<sup style="color: red;">*</sup>:</h5>
 
-            <div class="btn-group-toggle kitchenOptionButton" data-toggle="buttons"
+            <div class="btn-group-toggle kitchenOptionButton row" data-toggle="buttons"
               style="display:flex;justify-content: space-between;">
 
-              <label class="btn btn-outline-primary ">
+              <label class="btn btn-outline-primary col-12 col-md-4 col-lg-2">
                 <input type="checkbox" autocomplete="off" [(ngModel)]="NotRequiredKitchenItem"
                   name="notRequiredKitchenItem" [ngModelOptions]="{standalone: true}"> Not Required
               </label>
 
-              <label class="btn btn-outline-primary " *ngIf="NotRequiredKitchenItem==false">
+              <label class="btn btn-outline-primary col-12 col-md-4 col-lg-2" *ngIf="NotRequiredKitchenItem==false">
                 <input type="checkbox" autocomplete="off" [disabled]="NotRequiredKitchenItem==true"
                   [(ngModel)]="RefrigeratorKitchenItem" name="refrigeratorKitchenItem"
                   [ngModelOptions]="{standalone: true}"> Refrigerator
               </label>
 
-              <label class="btn btn-outline-primary " *ngIf="NotRequiredKitchenItem==false">
+              <label class="btn btn-outline-primary col-12 col-md-4 col-lg-2" *ngIf="NotRequiredKitchenItem==false">
                 <input type="checkbox" autocomplete="off" [disabled]="NotRequiredKitchenItem==true"
                   [(ngModel)]="WashingMachineKitchenItem" name="washingMachineKitchenItem"
                   [ngModelOptions]="{standalone: true}"> Washing Machine
               </label>
 
 
-              <label class="btn btn-outline-primary " *ngIf="NotRequiredKitchenItem==false">
+              <label class="btn btn-outline-primary col-12 col-md-4 col-lg-2" *ngIf="NotRequiredKitchenItem==false">
                 <input type="checkbox" autocomplete="off" [disabled]="NotRequiredKitchenItem==true"
                   [(ngModel)]="MicrowaveKitchenItem" name="microwaveKitchenItem" [ngModelOptions]="{standalone: true}">
                 Microwave
               </label>
 
-              <label class="btn btn-outline-primary " *ngIf="NotRequiredKitchenItem==false">
+              <label class="btn btn-outline-primary col-12 col-md-4 col-lg-2" *ngIf="NotRequiredKitchenItem==false">
                 <input type="checkbox" autocomplete="off" [disabled]="NotRequiredKitchenItem==true"
                   [(ngModel)]="TumbleDryer" name="tumbleDryer" [ngModelOptions]="{standalone: true}"> Tumble Dryer
               </label>
@@ -179,7 +180,7 @@
             <button mat-button matStepperPrevious style="background-color: dodgerblue;color: white;"
               (click)="decrementTheStep()"><i class="fa fa-arrow-left" style="margin-bottom: 7%;"
                 aria-hidden="true"></i> Back</button>
-
+                &nbsp;
 
             <button mat-button matStepperNext style="background-color: dodgerblue;color: white;"
               (click)="iterateTheStep(); dataFeedForConfirmation(); toLoad();"
@@ -191,21 +192,21 @@
 
       <mat-step>
         <ng-template matStepLabel>Confirm</ng-template>
-        <h3 style="width: 100%;justify-content: center;"><span class="badge badge-secondary"
+        <h4 style="width: 100%;justify-content: center;"><span class="badge badge-secondary"
             style="color:black;width: 100%;justify-content: center;border: solid;border-width: thin;border-color: black;background-color: white;">Your
-            Inputed Data Summary:</span></h3>
+            Inputed Data Summary:</span></h4>
 
         <div class="row" style="width: 100%;margin-top: 5%;">
           <div class="col-6" *ngIf="toLoad()">
-            <h3 style="width: 100%;justify-content: center;"><span class="badge badge-secondary"
-                style="width: 100%;justify-content: center;">Step One:</span></h3>
+            <h5 style="width: 100%;justify-content: center;"><span class="badge badge-secondary"
+                style="width: 100%;justify-content: center;">Step One:</span></h5>
 
             <h6>Selected Property Type: {{propertyType}}
 
             </h6>
             <h6>Selected Cleaning Type: {{cleaningType}}
             </h6>
-            <h6>Property Address: {{propertyAddress}}
+            <h6 style="word-wrap: break-word;">Property Address: {{propertyAddress}}
 
             </h6>
 
@@ -214,8 +215,8 @@
             </h6>
           </div>
           <div class="col-6" *ngIf="toLoad()">
-            <h3 style="width: 100%;justify-content: center;"><span class="badge badge-secondary"
-                style="width: 100%;justify-content: center;">Step Two:</span></h3>
+            <h5 style="width: 100%;justify-content: center;"><span class="badge badge-secondary"
+                style="width: 100%;justify-content: center;">Step Two:</span></h5>
             <h6>Bedrooms: {{bedrooms}}</h6>
             <h6>Bathrooms: {{bathrooms}}</h6>
             <h6>Bath Tubs: {{bathTubs}}</h6>
@@ -249,16 +250,16 @@
         </div>
 
 
-        <div style="display:flex;justify-content: space-between;margin-top: 5%;">
+        <div class="row" style="display:flex;justify-content: space-between;margin-top: 5%;">
 
-          <button mat-button matStepperPrevious style="background-color: dodgerblue;color: white;"
-            (click)="decrementTheStep()"><i class="fa fa-arrow-left" style="margin-bottom: 7%;" aria-hidden="true"></i>
+          <button class="col-12 col-md-3" mat-button matStepperPrevious style="background-color: dodgerblue;color: white;"
+            (click)="decrementTheStep()"><i class="fa fa-arrow-left"  aria-hidden="true"></i>
             Back</button>
-
-          <button mat-button (click)="stepper.reset();"
+&nbsp;
+          <button class="col-12 col-md-3" mat-button (click)="stepper.reset();"
             style="background-color: dodgerblue;color: white;">Reset</button>
-
-          <button mat-button matStepperNext style="background-color: dodgerblue;color: white;"
+            &nbsp;
+          <button class="col-12 col-md-3" mat-button matStepperNext style="background-color: dodgerblue;color: white;"
             (click)="createForm(); navigateToThankyouPage();">Confirm & Submit</button>
         </div>
       </mat-step>

@@ -8,8 +8,11 @@
     width: 18%;
     color: black;
     font-weight: bolder;
+    margin-top: 2%;
+    margin-left: 1%;
 }
 
 ::ng-deep .mat-horizontal-stepper-header{
     pointer-events: none !important;
 }
+
