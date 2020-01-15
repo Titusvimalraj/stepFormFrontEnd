@@ -1,0 +1,267 @@
+<div class="container-fluid">
+
+  <div class="row" style="justify-content: center;margin-top: 1%;">
+    <h1 style="width: 90vw;justify-content: center;"><span class="badge badge-secondary"
+        style="width: 90vw;justify-content: center;">Step {{nextStep}} of 3</span></h1>
+    <mat-horizontal-stepper labelPosition="bottom" #stepper style="width: 80vw;">
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Property Info</ng-template>
+
+          <div>
+
+            <h5 style="margin-bottom: 2%;">Select Property Type<sup style="color: red;">*</sup>:</h5>
+
+
+            <div class="btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-outline-primary ">
+                <input type="radio" checked autocomplete="off"> <i class="fa fa-home fa-5x" aria-hidden="true"
+                  (click)="setPropertyType('Residential');">
+                  <footer style="font-size: 20%;margin-top: 10%;">Residential</footer>
+                </i>
+              </label>
+
+              <label class="btn btn-outline-primary " style="margin-left: 10%;">
+                <input type="radio" autocomplete="off"> <i class="fa fa-building fa-5x" aria-hidden="true"
+                  (click)="setPropertyType('Commercial');">
+                  <footer style="font-size: 20%;margin-top: 10%;">Commercial</footer>
+                </i>
+              </label>
+            </div>
+          </div>
+          <div style="margin-top: 2%;">
+            <h5 style="margin-bottom: 2%;">Select Cleaning Type<sup style="color: red;">*</sup>:</h5>
+
+            <div class="btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-outline-primary ">
+                <input type="radio" checked autocomplete="off" (click)="setcleaningType('Shift Cleaning');"> Shift
+                Cleaning
+              </label>
+
+              <label class="btn btn-outline-primary " style="margin-left: 10%;">
+                <input type="radio" autocomplete="off" (click)="setcleaningType('Seasonal Cleaning');"> Seasonal
+                Cleaning
+              </label>
+            </div>
+          </div>
+
+
+          <!-- <input matInput placeholder="Propery" > -->
+
+          <div class="col-auto" style="margin-top: 5%;">
+            <label class="sr-only" for="inlineFormInputGroup">Property Address<sup style="color: red;">*</sup>:</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text" style="background-color: #495057;"><i class="fa fa-map-marker"
+                    aria-hidden="true" style="color: white;"></i></div>
+              </div>
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Property Address*"
+                formControlName="firstCtrl" required>
+            </div>
+          </div>
+
+
+
+          <div style="display:flex;justify-content: space-between;margin-top: 5%;">
+            <span class="btn btn-outline-primary">
+              <p style="color: black;margin: 0 0 0 0">Are you ready!</p>
+            </span>
+            <button mat-button matStepperNext style="background-color: dodgerblue;color: white;"
+              (click)="iterateTheStep()" [disabled]="getpropertyAddressMissingErrorMessage()">Next <i
+                class="fa fa-arrow-right" style="margin-bottom: 7%;" aria-hidden="true"></i></button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Required Cleaning</ng-template>
+          <div style="margin-top: 2%;">
+            <h5 style="margin-bottom: 2%;">ProPerty Size(sq.ft.)<sup style="color: red;">*</sup>:</h5>
+
+
+            <div class="btn-group-toggle numberOptionButton" data-toggle="buttons"
+              style="display:flex;justify-content: space-between;">
+              <label class="btn btn-outline-primary" *ngFor="let option of sqftOptions | keyvalue : returnZero">
+                <input type="radio" [(ngModel)]="option.key" [ngModelOptions]="{standalone: true}"
+                  [value]="option.value" (click)="setPropertySize(option)"> {{option.value}}
+              </label>
+
+            </div>
+          </div>
+
+          <div style="margin-top: 2%;">
+            <h5 style="margin-bottom: 2%;">Bedrooms<sup style="color: red;">*</sup>:</h5>
+
+            <div class="btn-group-toggle numberOptionButton" data-toggle="buttons"
+              style="display:flex;justify-content: space-between;">
+              <label class="btn btn-outline-primary " *ngFor="let room of bedroomOptions | keyvalue : returnZero">
+                <input type="radio" [(ngModel)]="room.key" [ngModelOptions]="{standalone: true}"
+                  (click)="setbedrooms(room)">{{room.value}}
+              </label>
+
+            </div>
+          </div>
+
+          <div style="margin-top: 2%;">
+            <h5 style="margin-bottom: 2%;">Bathrooms<sup style="color: red;">*</sup>:</h5>
+
+            <div class="btn-group-toggle numberOptionButton" data-toggle="buttons"
+              style="display:flex;justify-content: space-between;">
+
+              <label class="btn btn-outline-primary " *ngFor="let room of bathroomOptions | keyvalue : returnZero">
+                <input type="radio" [(ngModel)]="room.key" [ngModelOptions]="{standalone: true}"
+                  (click)="setBathrooms(room)">{{room.value}}
+              </label>
+
+
+            </div>
+          </div>
+
+
+          <div style="margin-top: 2%;">
+            <h5 style="margin-bottom: 2%;">Bathtubs<sup style="color: red;">*</sup>:</h5>
+
+            <div class="btn-group-toggle numberOptionButton" data-toggle="buttons"
+              style="display:flex;justify-content: space-between;">
+
+              <label class="btn btn-outline-primary " *ngFor="let bathtub of bathTubOptions | keyvalue : returnZero">
+                <input type="radio" [(ngModel)]="bathtub.key" [ngModelOptions]="{standalone: true}"
+                  (click)="setBathTubs(bathtub)">{{bathtub.value}}
+              </label>
+
+
+            </div>
+          </div>
+
+
+          <div style="margin-top: 2%;">
+            <h5 style="margin-bottom: 2%;">Kitchen items<sup style="color: red;">*</sup>:</h5>
+
+            <div class="btn-group-toggle kitchenOptionButton" data-toggle="buttons"
+              style="display:flex;justify-content: space-between;">
+
+              <label class="btn btn-outline-primary ">
+                <input type="checkbox" autocomplete="off" [(ngModel)]="NotRequiredKitchenItem"
+                  name="notRequiredKitchenItem" [ngModelOptions]="{standalone: true}"> Not Required
+              </label>
+
+              <label class="btn btn-outline-primary " *ngIf="NotRequiredKitchenItem==false">
+                <input type="checkbox" autocomplete="off" [disabled]="NotRequiredKitchenItem==true"
+                  [(ngModel)]="RefrigeratorKitchenItem" name="refrigeratorKitchenItem"
+                  [ngModelOptions]="{standalone: true}"> Refrigerator
+              </label>
+
+              <label class="btn btn-outline-primary " *ngIf="NotRequiredKitchenItem==false">
+                <input type="checkbox" autocomplete="off" [disabled]="NotRequiredKitchenItem==true"
+                  [(ngModel)]="WashingMachineKitchenItem" name="washingMachineKitchenItem"
+                  [ngModelOptions]="{standalone: true}"> Washing Machine
+              </label>
+
+
+              <label class="btn btn-outline-primary " *ngIf="NotRequiredKitchenItem==false">
+                <input type="checkbox" autocomplete="off" [disabled]="NotRequiredKitchenItem==true"
+                  [(ngModel)]="MicrowaveKitchenItem" name="microwaveKitchenItem" [ngModelOptions]="{standalone: true}">
+                Microwave
+              </label>
+
+              <label class="btn btn-outline-primary " *ngIf="NotRequiredKitchenItem==false">
+                <input type="checkbox" autocomplete="off" [disabled]="NotRequiredKitchenItem==true"
+                  [(ngModel)]="TumbleDryer" name="tumbleDryer" [ngModelOptions]="{standalone: true}"> Tumble Dryer
+              </label>
+
+
+            </div>
+          </div>
+
+
+          <div style="display:flex;justify-content: space-between;margin-top: 5%;">
+
+            <button mat-button matStepperPrevious style="background-color: dodgerblue;color: white;"
+              (click)="decrementTheStep()"><i class="fa fa-arrow-left" style="margin-bottom: 7%;"
+                aria-hidden="true"></i> Back</button>
+
+
+            <button mat-button matStepperNext style="background-color: dodgerblue;color: white;"
+              (click)="iterateTheStep(); dataFeedForConfirmation(); toLoad();"
+              [disabled]="propertySize==undefined && bedrooms==undefined && bathrooms==undefined && bathTubs==undefined">Next
+              <i class="fa fa-arrow-right" style="margin-bottom: 7%;" aria-hidden="true"></i></button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Confirm</ng-template>
+        <h3 style="width: 100%;justify-content: center;"><span class="badge badge-secondary"
+            style="color:black;width: 100%;justify-content: center;border: solid;border-width: thin;border-color: black;background-color: white;">Your
+            Inputed Data Summary:</span></h3>
+
+        <div class="row" style="width: 100%;margin-top: 5%;">
+          <div class="col-6" *ngIf="toLoad()">
+            <h3 style="width: 100%;justify-content: center;"><span class="badge badge-secondary"
+                style="width: 100%;justify-content: center;">Step One:</span></h3>
+
+            <h6>Selected Property Type: {{propertyType}}
+
+            </h6>
+            <h6>Selected Cleaning Type: {{cleaningType}}
+            </h6>
+            <h6>Property Address: {{propertyAddress}}
+
+            </h6>
+
+            <h6>Property Size: {{propertySize}}
+
+            </h6>
+          </div>
+          <div class="col-6" *ngIf="toLoad()">
+            <h3 style="width: 100%;justify-content: center;"><span class="badge badge-secondary"
+                style="width: 100%;justify-content: center;">Step Two:</span></h3>
+            <h6>Bedrooms: {{bedrooms}}</h6>
+            <h6>Bathrooms: {{bathrooms}}</h6>
+            <h6>Bath Tubs: {{bathTubs}}</h6>
+            <h6>Kitchen Items:
+              <p>
+
+              </p>
+              <p *ngIf="NotRequiredKitchenItem">
+
+                Not Required
+              </p>
+              <p *ngIf="RefrigeratorKitchenItem">
+
+                Refrigerator
+              </p>
+              <p *ngIf="WashingMachineKitchenItem">
+
+                Washing Machine
+              </p>
+              <p *ngIf="MicrowaveKitchenItem">
+
+                Microwave
+              </p>
+              <p *ngIf="TumbleDryer">
+
+                Tumble Dryer
+              </p>
+
+            </h6>
+          </div>
+        </div>
+
+
+        <div style="display:flex;justify-content: space-between;margin-top: 5%;">
+
+          <button mat-button matStepperPrevious style="background-color: dodgerblue;color: white;"
+            (click)="decrementTheStep()"><i class="fa fa-arrow-left" style="margin-bottom: 7%;" aria-hidden="true"></i>
+            Back</button>
+
+          <button mat-button (click)="stepper.reset();"
+            style="background-color: dodgerblue;color: white;">Reset</button>
+
+          <button mat-button matStepperNext style="background-color: dodgerblue;color: white;"
+            (click)="createForm(); navigateToThankyouPage();">Confirm & Submit</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>

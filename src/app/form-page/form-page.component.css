@@ -1,0 +1,15 @@
+.numberOptionButton label{
+    width: 15%;
+    color: black;
+    font-weight: bolder;
+}
+
+.kitchenOptionButton label{
+    width: 18%;
+    color: black;
+    font-weight: bolder;
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+    pointer-events: none !important;
+}
